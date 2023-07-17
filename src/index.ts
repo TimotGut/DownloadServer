@@ -73,11 +73,16 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
             let files = fs.readdirSync(localPath);
             //listing all files using forEach
             
-            files?.forEach(function (file) {
-                // Do whatever you want to do with the file
-                console.log("File:" + file); 
-                
-            });
+            if(files === undefined){
+                files.forEach(function (file) {
+                    // Do whatever you want to do with the file
+                    console.log("File:" + file); 
+                    
+                });
+                return []
+            }
+
+
             return files;
         }catch(err){
             console.log("error finding " + localPath)
@@ -85,9 +90,7 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
 
 
 
-        
-
-        
+        return []       
     }
 
 

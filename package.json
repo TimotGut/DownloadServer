@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "play": "node .",
-    "start": "npm run build && npm run play "
+    "start": "npm run build && npm run play ",
+    "play dev": "nodemon ."
   },
   "author": "",
   "license": "ISC",
