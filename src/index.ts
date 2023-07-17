@@ -58,10 +58,12 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
         let allFiles = getAllFiles(PUBLICFOLDER + url);
 
         
-
-        allFiles.forEach(file => {
-            text += "<br><a href=\"" + WEBSITE_PREFIX + host  + url +  file + "\">" + file + "</a>";
-        });
+        if(allFiles === undefined){
+            allFiles.forEach(file => {
+                text += "<br><a href=\"" + WEBSITE_PREFIX + host  + url +  file + "\">" + file + "</a>";
+            });
+            
+        }
         res.send(text)
         
         
