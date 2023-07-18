@@ -86,18 +86,12 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
                     console.log("File:" + file); 
                     
                 });
-                return []
+                
             }
-
-
             return files;
         }catch(err){
             console.log("error finding " + localPath)
         }
-
-
-
-        return []       
     }
 
 
