@@ -45,7 +45,10 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
         let splitUrl = url.split("/")
         let parentURL = url.replace(splitUrl[splitUrl.length - 2], "") // remove the last /*path*/  from "/Users/Timo/" to "/Users//"
         if(parentURL.endsWith("//")){
-            parentURL = parentURL.slice(0,parentURL.length-2) //removes the last  slash "//" => "/" from "/Users//" to "/Users/"
+            parentURL = parentURL.slice(0,parentURL.length-1) //removes the last  slash "//" => "/" from "/Users//" to "/Users/"
+        }
+        if(url.startsWith("/")){
+            url = url.slice(1,url.length);
         }
         
 
@@ -58,11 +61,13 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
         let allFiles = getAllFiles(PUBLICFOLDER + url);
 
         
-        if(allFiles === undefined){
+        if(allFiles !== undefined){
             allFiles.forEach(file => {
                 text += "<br><a href=\"" + WEBSITE_PREFIX + host  + url +  file + "\">" + file + "</a>";
             });
-            
+            console.log("FILES:" + allFiles);
+        }else{
+            console.log("NO FILES FOUND");
         }
         res.send(text)
         
