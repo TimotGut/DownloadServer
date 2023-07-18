@@ -8,6 +8,7 @@ import bodyParser from "body-parser"
 
 StartServer(3654,"C:");
 
+///PUBLICFOLDER needs to end with "/"
 function StartServer(PORT:number,PUBLICFOLDER:string){
     const WEBSITE_PREFIX = "http://"
 
@@ -47,8 +48,10 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
         if(parentURL.endsWith("//")){
             parentURL = parentURL.slice(0,parentURL.length-1) //removes the last  slash "//" => "/" from "/Users//" to "/Users/"
         }
+
+        let noSlashURL;
         if(url.startsWith("/")){
-            url = url.slice(1,url.length);
+            noSlashURL = url.slice(1,url.length);
         }
         
 
@@ -58,7 +61,7 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
             text += returnLink;
         }
 
-        let allFiles = getAllFiles(PUBLICFOLDER + url);
+        let allFiles = getAllFiles(PUBLICFOLDER + noSlashURL);
 
         
         if(allFiles !== undefined){
