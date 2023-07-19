@@ -6,7 +6,19 @@ import fs, { ObjectEncodingOptions } from "fs"
 import path from "path"
 import bodyParser from "body-parser"
 
-StartServer(3654,"C:");
+const arg = process.argv.slice(2);
+
+if(arg[0] !== undefined ){
+    if(getAllFiles(arg[0])){
+        StartServer(3654, arg[0]);
+    }else{
+        console.log("Path not valid. Please input a valid path!")
+
+    }
+}else{
+    console.log("No input path. Using local path ... ")
+    StartServer(3654, "./");
+}
 
 ///PUBLICFOLDER needs to end with "/"
 function StartServer(PORT:number,PUBLICFOLDER:string){
@@ -77,28 +89,30 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
         
     })
 
-    function getAllFiles(localPath:string) : string[]{
-        //let globalPath = path.join(__dirname,localPath) 
-        try{
-            let files = fs.readdirSync(localPath);
-            //listing all files using forEach
-            
-            if(files === undefined){
-                files.forEach(function (file) {
-                    // Do whatever you want to do with the file
-                    console.log("File:" + file); 
-                    
-                });
-                
-            }
-            return files;
-        }catch(err){
-            console.log("error finding " + localPath)
-        }
-    }
+    
 
 
     app.listen(PORT,() => {
         console.log("[Server]: Server is running at http://localhost:" + PORT)
     })
+}
+
+function getAllFiles(localPath:string) : string[]{
+    //let globalPath = path.join(__dirname,localPath) 
+    try{
+        let files = fs.readdirSync(localPath);
+        //listing all files using forEach
+        
+        if(files === undefined){
+            files.forEach(function (file) {
+                // Do whatever you want to do with the file
+                console.log("File:" + file); 
+                
+            });
+            
+        }
+        return files;
+    }catch(err){
+        console.log("error finding " + localPath)
+    }
 }
