@@ -16,7 +16,7 @@ if(arg[0] !== undefined ){
 
     }
 }else{
-    console.log("No input path. Using local path ... ")
+    console.log("No input path. Using local path...")
     StartServer(3654, "./");
 }
 
@@ -80,7 +80,7 @@ function StartServer(PORT:number,PUBLICFOLDER:string){
             allFiles.forEach(file => {
                 text += "<br><a href=\"" + WEBSITE_PREFIX + host  + url +  file + "\">" + file + "</a>";
             });
-            console.log("FILES:" + allFiles);
+            console.log("FILES:" + allFiles.length);
         }else{
             console.log("NO FILES FOUND");
         }
